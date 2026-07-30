@@ -12,6 +12,4 @@ router.get("/registration", userRegistration);
 
 router.get("/login", userLogin);
 
-
-
 module.exports = router
