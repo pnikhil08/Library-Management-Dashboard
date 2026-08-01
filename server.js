@@ -22,8 +22,6 @@ app.use("/tasks", createTask)
 app.use("/user", userRoutes);
 app.use("/product", productRoutes);
 
-
-
 const serverStart = async () => {
   try {
     await connectDB();
