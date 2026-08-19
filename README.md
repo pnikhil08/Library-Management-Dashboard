@@ -12,14 +12,7 @@ A simple and user-friendly **Library Management Dashboard** designed to manage b
 * 📅 Track due dates and returns
 * 📱 Responsive and user-friendly interface
 
-
-
 ## 🚀 Getting Started
-
-```bash
-git clone <your-repository-url>
-cd Library-Management-Dashboard
-```
 
 Install dependencies if required and start the project according to your configured environment.
 
