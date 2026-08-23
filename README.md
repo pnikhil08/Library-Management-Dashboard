@@ -3,7 +3,6 @@
 A simple and user-friendly **Library Management Dashboard** designed to manage books, students/members, issue and return records, and overall library activities from a centralized dashboard.
 
 ## ✨ Features
-
 * 📖 Manage books and book details
 * 👨‍🎓 Manage students/members
 * 🔄 Track issued and returned books
