@@ -51,26 +51,6 @@ exports.getTaskById = async (re, res) => {
   }
 };
 
-// exports.updateTask = async (re, res) => {
-//   try {
-//     const task = await Task.findByIdAndUpdate(re.params.id, re.body, {
-//       new: true,
-//       runValidators: true,
-//     });
-//     res.status(201).json(task);
-//   } catch (err) {
-//     if (err.name === "CastError") {
-//       res.status(400).json({
-//         message: "Invalid Task Id",
-//       });
-//     }
-
-//     res.status(500).json({
-//       message: err.message,
-//     });
-//   }
-// };
-
 exports.updateTask = async(re , res) => {
     try{
         const task = await Task.findById(re.params.id);
@@ -106,35 +86,6 @@ exports.updateTask = async(re , res) => {
         })
     }
 }
-
-
-// exports.deleteTask = async(re, res) =>{
-//     try{
-//         const task = await Task.findByIdAndDelete(re.params.id)
-
-//         if(!task){
-//          return   res.status(404).json({
-//                 message : "Task id not Found"
-//             })
-//         }
-        
-//         res.status(200).json({
-//             message : "Task is Deleted Sussecfully"
-//         })
-
-//     }
-//     catch(err){
-//         if(err.name === "CastError"){
-//             return res.status(400).json({
-//                 message : "Invalid Task Id"
-//             })
-//         }
-
-//         res.status(500).json({
-//             message : err.message
-//         })
-//     }
-// }
 
 exports.deleteTask = async(re, res) => {
     try{
