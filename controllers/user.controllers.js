@@ -1,19 +1,30 @@
-exports.getUsers = (re, res) => {
-   res.send("All User")
-}
+// Get all users
+// Sends a simple response containing all users
+exports.getUsers = (req, res) => {
+    res.send("All User");
+};
 
-exports.getProfile = (re, res) =>{
-    res.json('this is user Profile')
-}
 
-exports.userRegistration = (re, res) =>{
-    res.json("User Registration Sucessfull")
-}
+// Get user profile
+// Returns the user's profile information as a JSON response
+exports.getProfile = (req, res) => {
+    res.json("This is user Profile");
+};
 
-exports.userLogin = (re, res)=>{
-  res.json({
-    id : 1,
-    username : "New User",
-    Massage : "Login Succesfull"
-  })
-}
+
+// Register a new user
+// Sends a success message after user registration
+exports.userRegistration = (req, res) => {
+    res.json("User Registration Successful");
+};
+
+
+// Login user
+// Returns basic user information along with a login success message
+exports.userLogin = (req, res) => {
+    res.json({
+        id: 1,
+        username: "New User",
+        message: "Login Successful"
+    });
+};
