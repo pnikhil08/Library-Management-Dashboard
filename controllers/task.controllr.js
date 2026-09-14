@@ -1,110 +1,161 @@
+
+const mongoose = require("mongoose");
 const Task = require("../models/task.model");
 
-exports.creatTask = async (req, res) => {
+/**
+ * Create a new task
+ * POST /api/tasks
+ */
+exports.createTask = async (req, res) => {
   try {
-    console.log(req.body);
+    // Create a new task using data received from the client
     const task = await Task.create(req.body);
-    res.status(201).json(task);
+
+    // Return the newly created task
+    return res.status(201).json(task);
   } catch (err) {
-    console.log("Error:", err);
-    console.log("Message:", err.message);
-    console.log("Stack:", err.stack);
-    res.status(500).json({
-      message: err.message,
+    console.error("Create Task Error:", err.message);
+
+    return res.status(500).json({
+      message: "Failed to create task",
+      error: err.message,
     });
   }
 };
 
-exports.getAllTask = async (re, res) => {
+/**
+ * Get all tasks
+ * GET /api/tasks
+ */
+exports.getAllTask = async (req, res) => {
   try {
-    const allTask = await Task.find();
-    res.status(200).json(allTask);
+    // Fetch all tasks from MongoDB
+    const tasks = await Task.find();
+
+    return res.status(200).json(tasks);
   } catch (err) {
-    res.status(500).json({
-      message: err.message,
+    console.error("Get All Tasks Error:", err.message);
+
+    return res.status(500).json({
+      message: "Failed to fetch tasks",
+      error: err.message,
     });
   }
 };
 
-exports.getTaskById = async (re, res) => {
+/**
+ * Get a single task by ID
+ * GET /api/tasks/:id
+ */
+exports.getTaskById = async (req, res) => {
   try {
-    const taskId = re.params.id;
+    const { id } = req.params;
 
-    const task = await Task.findById(taskId);
-
-    if (!task) {
-      return res.status(404).json({
-        message: "Task ID not found",
-      });
-    }
-    res.status(200).json(task);
-  } catch (err) {
-    if (err.name === "CastError") {
+    // Validate MongoDB ObjectId before querying the database
+    if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({
         message: "Invalid Task ID",
       });
     }
 
-    res.status(500).json({
-      message: err.message,
+    // Find task by ID
+    const task = await Task.findById(id);
+
+    // Task does not exist
+    if (!task) {
+      return res.status(404).json({
+        message: "Task not found",
+      });
+    }
+
+    return res.status(200).json(task);
+  } catch (err) {
+    console.error("Get Task Error:", err.message);
+
+    return res.status(500).json({
+      message: "Failed to fetch task",
+      error: err.message,
     });
   }
 };
 
-exports.updateTask = async(re , res) => {
-    try{
-        const task = await Task.findById(re.params.id);
-       if(!task){
-        return res.status(404).json({
-            message : "Task ID Not Found"
-        })
-       }
+/**
+ * Update a task by ID
+ * PUT /api/tasks/:id
+ */
+exports.updateTask = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-       if(re.body.title !== undefined){
-         task.title = re.body.title
-       }
-       if(re.body.description !== undefined){
-        task.description = re.body.description
-       }
-       if(re.body.completed !== undefined){
-        task.completed = re.body.completed
-       }
-
-     await task.save();
-
-     res.status(200).json(task)
-
-    }catch(err){
-        if(err.name === "CastError"){
-          return  res.status(400).json({
-                message : "Invalid Task Id"
-            })
-        }
-
-        res.status(500).json({
-            message : err.message
-        })
+    // Validate MongoDB ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        message: "Invalid Task ID",
+      });
     }
-}
 
-exports.deleteTask = async(re, res) => {
-    try{
-        const task = await Task.findById(re.params.id);
+    // Update only the fields provided in the request body
+    const task = await Task.findByIdAndUpdate(
+      id,
+      req.body,
+      {
+        new: true,          // Return the updated document
+        runValidators: true // Run schema validation
+      }
+    );
 
-        if(!task){
-            return res.status(404).json({
-                message : "Task Id Not Found"
-            })
-        }
-
-        await task.deleteOne();
-
-        res.status(200).json({
-            message : "Task Deleted Successfully"
-        })
-    }catch(err){
-        return res.status(500).json({
-            message : "Server side Error"
-        })
+    // Task does not exist
+    if (!task) {
+      return res.status(404).json({
+        message: "Task not found",
+      });
     }
-}
+
+    return res.status(200).json(task);
+  } catch (err) {
+    console.error("Update Task Error:", err.message);
+
+    return res.status(500).json({
+      message: "Failed to update task",
+      error: err.message,
+    });
+  }
+};
+
+/**
+ * Delete a task by ID
+ * DELETE /api/tasks/:id
+ */
+exports.deleteTask = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Validate MongoDB ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        message: "Invalid Task ID",
+      });
+    }
+
+    // Find and delete the task
+    const task = await Task.findByIdAndDelete(id);
+
+    // Task does not exist
+    if (!task) {
+      return res.status(404).json({
+        message: "Task not found",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Task deleted successfully",
+    });
+  } catch (err) {
+    console.error("Delete Task Error:", err.message);
+
+    return res.status(500).json({
+      message: "Failed to delete task",
+      error: err.message,
+    });
+  }
+};
