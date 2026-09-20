@@ -1,10 +1,16 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
+// Define the schema for Todo documents
 const todoSchema = new mongoose.Schema({
-    title : String,
+    // Title of the todo
+    title: String,
+
+    // Current status of the todo
     status: String
-})
+});
 
-const Todo = mongoose.model("Todo", todoSchema)
+// Create a Todo model using the todoSchema
+const Todo = mongoose.model("Todo", todoSchema);
 
-module.exports = Todo
+// Export the Todo model so it can be used in other files
+module.exports = Todo;
