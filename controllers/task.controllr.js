@@ -2,10 +2,7 @@
 const mongoose = require("mongoose");
 const Task = require("../models/task.model");
 
-/**
- * Create a new task
- * POST /api/tasks
- */
+
 exports.createTask = async (req, res) => {
   try {
     // Create a new task using data received from the client
@@ -44,7 +41,6 @@ exports.getAllTask = async (req, res) => {
 };
 
 /**
- * Get a single task by ID
  * GET /api/tasks/:id
  */
 exports.getTaskById = async (req, res) => {
@@ -80,7 +76,6 @@ exports.getTaskById = async (req, res) => {
 };
 
 /**
- * Update a task by ID
  * PUT /api/tasks/:id
  */
 exports.updateTask = async (req, res) => {
@@ -99,7 +94,7 @@ exports.updateTask = async (req, res) => {
       id,
       req.body,
       {
-        new: true,          // Return the updated document
+        new: true,          
         runValidators: true // Run schema validation
       }
     );
