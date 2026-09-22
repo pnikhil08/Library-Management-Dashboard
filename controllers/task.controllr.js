@@ -5,7 +5,7 @@ const Task = require("../models/task.model");
 
 exports.createTask = async (req, res) => {
   try {
-    // Create a new task using data received from the client
+
     const task = await Task.create(req.body);
 
     // Return the newly created task
@@ -40,9 +40,6 @@ exports.getAllTask = async (req, res) => {
   }
 };
 
-/**
- * GET /api/tasks/:id
- */
 exports.getTaskById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -75,9 +72,7 @@ exports.getTaskById = async (req, res) => {
   }
 };
 
-/**
- * PUT /api/tasks/:id
- */
+
 exports.updateTask = async (req, res) => {
   try {
     const { id } = req.params;
@@ -132,7 +127,6 @@ exports.deleteTask = async (req, res) => {
       });
     }
 
-    // Find and delete the task
     const task = await Task.findByIdAndDelete(id);
 
     // Task does not exist
