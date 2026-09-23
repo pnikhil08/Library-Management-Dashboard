@@ -1,4 +1,3 @@
-
 const express = require("express");
 
 const router = express.Router();
@@ -108,20 +107,7 @@ const productList = [
         category: "Home",
         stock: 28
     },
-    {
-        id: 14,
-        name: "Notebook",
-        price: 199,
-        category: "Stationery",
-        stock: 100
-    },
-    {
-        id: 15,
-        name: "Water Bottle",
-        price: 499,
-        category: "Lifestyle",
-        stock: 50
-    }
+
 ];
 
 router.get("/", (req, res) => {
