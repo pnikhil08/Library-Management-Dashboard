@@ -52,20 +52,6 @@ const productList = [
         stock: 30
     },
     {
-        id: 6,
-        name: "Gaming Headset",
-        price: 2999,
-        category: "Gaming",
-        stock: 10
-    },
-    {
-        id: 7,
-        name: "Smart Watch",
-        price: 4999,
-        category: "Wearables",
-        stock: 15
-    },
-    {
         id: 8,
         name: "Power Bank",
         price: 1499,
@@ -79,34 +65,7 @@ const productList = [
         category: "Storage",
         stock: 8
     },
-    {
-        id: 10,
-        name: "Webcam",
-        price: 1799,
-        category: "Electronics",
-        stock: 14
-    },
-    {
-        id: 11,
-        name: "Monitor",
-        price: 11999,
-        category: "Electronics",
-        stock: 6
-    },
-    {
-        id: 12,
-        name: "Office Chair",
-        price: 6999,
-        category: "Furniture",
-        stock: 9
-    },
-    {
-        id: 13,
-        name: "Desk Lamp",
-        price: 699,
-        category: "Home",
-        stock: 28
-    },
+
 
 ];
 
