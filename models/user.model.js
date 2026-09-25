@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema(
             required: true,
             trim: true
         },
-
         // User's email address
         email: {
             type: String,
@@ -31,7 +30,6 @@ const userSchema = new mongoose.Schema(
             enum: ["user", "admin"],
             default: "user"
         },
-
         // URL/path of the user's profile image
         profileImage: {
             type: String,
@@ -43,9 +41,7 @@ const userSchema = new mongoose.Schema(
         timestamps: true
     }
 );
-
 // Create the User model using the userSchema
 const User = mongoose.model("User", userSchema);
-
 // Export the User model for use in other files
 module.exports = User;
