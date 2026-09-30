@@ -5,6 +5,6 @@ const userValidation = (req, res, next) => {
 
     next();
 };
-
+// user validation
 module.exports = userValidation;
 
