@@ -21,7 +21,6 @@ exports.createTask = async (req, res) => {
 };
 
 /**
- * Get all tasks
  * GET /api/tasks
  */
 exports.getAllTask = async (req, res) => {
@@ -112,8 +111,7 @@ exports.updateTask = async (req, res) => {
   }
 };
 
-/**
- * Delete a task by ID
+/*
  * DELETE /api/tasks/:id
  */
 exports.deleteTask = async (req, res) => {
